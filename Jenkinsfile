@@ -1,10 +1,10 @@
 Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent { docker { image 'ruby:3.0.3-alpine' } }
+    agent { docker { image 'php:8.1.0-alpine' } }
     stages {
         stage('build') {
             steps {
-                sh 'ruby --version'
+                sh 'php --version'
             }
         }
     }
