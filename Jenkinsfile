@@ -1,12 +1,26 @@
-Jenkinsfile (Declarative Pipeline)
+
+
 pipeline {
-    agent { docker { image 'php:8.1.0-alpine' } }
-    stages {
-        stage('build') {
+    agent any
+
+    
+        stage("build") {
             steps {
-                sh 'php --version'
+                echo 'building the application...'
             }
         }
-    }
+        stage("test") {
+            steps {
+                echo 'testing the application...'
+                }
+            }
+            
+        stage("deploy") {
+            steps {
+                echo 'building the application...''
+                }
+            }
+        }
+    }   
 }
-#
+
