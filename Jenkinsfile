@@ -7,7 +7,7 @@ pipeline {
                 // Get code from your version control system (e.g., Git)
                 git branch: 'main', // Replace with your branch name
                    credentialsId: 'your-credentials-id', // Replace with your credentials ID (if needed)
-                   url: 'https://github.com/your-username/your-repository.git'
+                   url: 'https://github.com/yahyagulshan/jenkinspipeline.git'
             }
         }
         stage('Build') {
