@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    environment {
+        // Replace 'my-ssh-key' with the ID of your SSH key credential in Jenkins
+        SSH_KEY_CREDENTIAL_ID = 'ec2-connect-key'
+        // Replace with your EC2 instance's public DNS or IP address
+        EC2_INSTANCE = 'ec2-user@154.25.96.89'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/yahyagulshan/jenkinspipeline.git'
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    sshagent([SSH_KEY_CREDENTIAL_ID]) {
+                        // Transfer the code to the EC2 instance
+                        sh """
+                        scp -o StrictHostKeyChecking=no -r ./ ${EC2_INSTANCE}:/path/to/deployment/directory
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
