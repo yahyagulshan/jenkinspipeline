@@ -5,7 +5,7 @@ pipeline {
     stage('Checkout Code') {
       steps {
         git branch: 'main',
-           credentialsId: 'your-credentials-id',
+           credentialsId: 'yahyagulshan',
            url: 'https://github.com/yahyagulshan/jenkinspipeline/edit/main/Jenkinsfile.git'
       }
     }
