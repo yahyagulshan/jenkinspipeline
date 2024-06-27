@@ -1,49 +1,32 @@
-def gv
-
 pipeline {
-    agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
-    }
+    agent any // Run on any available agent
+
     stages {
-        stage("init") {
+        stage('Checkout Code') {
             steps {
-                script {
-                   gv = load "script.groovy" 
-                }
+                // Get code from your version control system (e.g., Git)
+                git branch: 'main', // Replace with your branch name
+                   credentialsId: 'your-credentials-id', // Replace with your credentials ID (if needed)
+                   url: 'https://github.com/your-username/your-repository.git'
             }
         }
-        stage("build") {
+        stage('Build') {
             steps {
-                script {
-                    gv.buildApp()
-                }
+                // Perform build steps specific to your project (e.g., mvn clean install, npm install, etc.)
+                sh 'mvn clean install' // Example using Maven
             }
         }
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
+        stage('Test') {
             steps {
-                script {
-                    gv.testApp()
-                }
+                // Run tests for your application (e.g., mvn test, npm test, etc.)
+                sh 'mvn test' // Example using Maven
             }
         }
-        stage("deploy") {
+        stage('Deploy (Optional)') {
             steps {
-                script {
-                    gv.deployApp()
-                }
+                // Deploy your application to a staging or production environment (optional)
+                // You might need additional tools or configurations depending on your deployment method
             }
         }
-    }   
+    }
 }
-
-
-   
-
-
