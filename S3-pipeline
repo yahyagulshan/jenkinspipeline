@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        // Replace with your AWS credentials ID in Jenkins
+        AWS_CREDENTIALS_ID = 'aws-credentials'
+        // Replace with your S3 bucket name
+        S3_BUCKET = 'yahya-test-bucket-12332323'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/yahyagulshan/jenkinspipeline.git'
+            }
+        }
+
+        stage('Upload to S3') {
+            steps {
+                withAWS(credentials: AWS_CREDENTIALS_ID) {
+                    sh """
+                    aws s3 sync . s3://${S3_BUCKET}/
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Code pushed to S3 successfully!'
+        }
+        failure {
+            echo 'Failed to push code to S3!'
+        }
+    }
+}
