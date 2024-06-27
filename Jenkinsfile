@@ -22,8 +22,8 @@ pipeline {
                 sh 'mvn test' // Example using Maven
             }
         }
-        stage('Deploy (Optional)') {
-            steps {
+        // stage('Deploy (Optional)') {
+        //     steps {
                 // Deploy your application to a staging or production environment (optional)
                 // You might need additional tools or configurations depending on your deployment method
             }
