@@ -5,7 +5,7 @@ pipeline {
         // Replace with your AWS credentials ID in Jenkins
         AWS_CREDENTIALS_ID = 'AWS-Access-key'
         // Replace with your S3 bucket name
-        S3_BUCKET = 'yahya-test-bucket-12332323'
+        S3_BUCKET = 'yahya-test-bucket-123323'
     }
 
     stages {
