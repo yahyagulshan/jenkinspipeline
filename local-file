@@ -5,7 +5,7 @@ pipeline {
         stage('Create Local Folder') {
             steps {
                 script {
-                    sh 'mkdir -p /home/yahya/workspace/delete-dir/my-local-folder' // Replace with desired path
+                    sudo sh 'mkdir -p /home/yahya/workspace/delete-dir/my-local-folder' // Replace with desired path
                 }
             }
         }
