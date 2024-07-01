@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Create Local Folder') {
+            steps {
+                script {
+                    sh 'mkdir -p /home/yahya/workspace/delete-dir/my-local-folder' // Replace with desired path
+                }
+            }
+        }
+        // Other build stages...
+    }
+}
